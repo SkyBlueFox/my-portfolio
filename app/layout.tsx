@@ -1,29 +1,38 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+// app/layout.tsx
+// ─────────────────────────────────────────────────────────────────────────────
+// Root layout — HTML shell, metadata, and global styles.
+// Stays a Server Component (no "use client") for maximum performance.
+// ─────────────────────────────────────────────────────────────────────────────
 
-const inter = Inter({ subsets: ["latin"] });
+import type { Metadata } from "next";
+import { ThemeProvider } from "@/components/theme-provider";
+import MouseSpotlight from "@/components/ui/MouseSpotlight";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Suphachai | Frontend Developer",
-  description: "Portfolio of Suphachai Pattanathiradej, a Frontend Developer seeking internship opportunities.",
+  title: "Supachai Pattanateeradej — Frontend Developer",
+  description:
+    "Computer Science student and Frontend Developer intern candidate. Builds fast, accessible, and clean web applications with React, Next.js, and TypeScript.",
+  openGraph: {
+    title: "Supachai Pattanateeradej — Frontend Developer",
+    description:
+      "CS student passionate about building fast, accessible web apps.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={inter.className}>
-        <Navbar />
-        <main className="max-w-5xl mx-auto px-6 pt-16">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <body className="antialiased">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <MouseSpotlight />
           {children}
-        </main>
-        <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

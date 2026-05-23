@@ -1,18 +1,32 @@
-import SectionHeader from '../ui/SectionHeader';
-import ProjectCard from '../ui/ProjectCard';
-import { portfolioData } from '@/lib/data';
+// components/sections/Projects.tsx
+// Server Component — delegates card layout to <ProjectCard>.
 
-export default function Projects() {
+import type { Project } from "@/lib/data";
+import SectionHeader from "@/components/ui/SectionHeader";
+import ProjectCard from "@/components/ui/ProjectCard";
+
+interface ProjectsProps {
+  projects: Project[];
+}
+
+export default function Projects({ projects }: ProjectsProps) {
   return (
-    <section id="projects" className="py-20 border-t border-slate-800">
-      <SectionHeader
-        title="Featured Projects"
-        subtitle="Some of the recent work I've done."
-      />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {portfolioData.projects.map((project, index) => (
-          <ProjectCard key={index} project={project} />
-        ))}
+    <section id="projects" aria-label="Projects" className="py-24 px-5 sm:px-8">
+      <div className="max-w-5xl mx-auto">
+        <SectionHeader index="02" title="Projects" />
+
+        {/* 1 col mobile → 2 col md+ */}
+        <ul
+          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+          role="list"
+          aria-label="Project list"
+        >
+          {projects.map((project) => (
+            <li key={project.title}>
+              <ProjectCard project={project} />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
