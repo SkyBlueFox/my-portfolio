@@ -39,7 +39,7 @@ const FigmaIcon = ({ size = 12 }: { size?: number }) => (
 
 interface ProjectCardProps {
   project: Project;
-  selectedRole?: "all" | "uxui" | "frontend" | "web";
+  selectedRole?: "all" | "uxui" | "frontend" | "web" | "mobile";
 }
 
 export default function ProjectCard({ project, selectedRole = "all" }: ProjectCardProps) {

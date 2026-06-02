@@ -38,14 +38,14 @@ const FigmaIcon = ({ size = 12 }: { size?: number }) => (
 
 interface DesignShowcaseProps {
   designItems: DesignItem[];
-  selectedRole: "all" | "uxui" | "frontend" | "web";
+  selectedRole: "all" | "uxui" | "frontend" | "web" | "mobile";
 }
 
 const getDesignRelevance = (title: string): string[] => {
-  if (title.includes("Jorney")) return ["uxui", "frontend"];
-  if (title.includes("HomeBase")) return ["uxui", "web"];
-  if (title.includes("Art Toy")) return ["uxui", "web"];
-  return ["uxui", "frontend", "web"];
+  if (title.includes("Jorney")) return ["uxui", "frontend", "mobile"];
+  if (title.includes("HomeBase")) return ["uxui", "web", "mobile"];
+  if (title.includes("Art Toy")) return ["uxui", "web", "mobile"];
+  return ["uxui", "frontend", "web", "mobile"];
 };
 
 export default function DesignShowcase({ designItems, selectedRole }: DesignShowcaseProps) {

@@ -94,6 +94,12 @@ export const portfolioData: PortfolioData = {
       bio: "A Computer Science student at Kasetsart University designing full-stack systems with Laravel PHP, MySQL, and RESTful API integrations. Experienced in role-based access control and high-performance backend pipelines.",
       skillsHighlight: "Backend & Systems",
     },
+    mobile: {
+      title: "Mobile Developer",
+      tagline: "Engineering Fluid & High-Performance Mobile Applications",
+      bio: "A Computer Science student at Kasetsart University specializing in Flutter, Dart, and responsive cross-platform architectures. Dedicated to building smooth client interfaces and optimizing mobile application states.",
+      skillsHighlight: "Frontend & Mobile",
+    },
   },
 
   skillCategories: [

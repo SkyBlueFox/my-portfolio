@@ -12,7 +12,7 @@ import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 
-export type RoleType = "all" | "uxui" | "frontend" | "web";
+export type RoleType = "all" | "uxui" | "frontend" | "web" | "mobile";
 
 export default function Page() {
   const [selectedRole, setSelectedRole] = useState<RoleType>("all");

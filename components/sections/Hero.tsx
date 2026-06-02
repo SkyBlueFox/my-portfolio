@@ -8,8 +8,8 @@ import type { Profile, RoleDetails } from "@/lib/data";
 interface HeroProps {
   profile: Profile;
   roles: Record<string, RoleDetails>;
-  selectedRole: "all" | "uxui" | "frontend" | "web";
-  setSelectedRole: (role: "all" | "uxui" | "frontend" | "web") => void;
+  selectedRole: "all" | "uxui" | "frontend" | "web" | "mobile";
+  setSelectedRole: (role: "all" | "uxui" | "frontend" | "web" | "mobile") => void;
 }
 
 export default function Hero({ profile, roles, selectedRole, setSelectedRole }: HeroProps) {
@@ -58,6 +58,7 @@ export default function Hero({ profile, roles, selectedRole, setSelectedRole }: 
             { id: "all", label: "All Perspectives" },
             { id: "uxui", label: "🎨 UX/UI Design" },
             { id: "frontend", label: "⚡ Frontend Dev" },
+            { id: "mobile", label: "📱 Mobile Dev" },
             { id: "web", label: "🌐 Web Dev" },
           ].map((tab) => {
             const isActive = selectedRole === tab.id;

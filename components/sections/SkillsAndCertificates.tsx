@@ -6,7 +6,7 @@ import Badge from "@/components/ui/Badge";
 
 interface SkillsProps {
   skillCategories: SkillCategory[];
-  selectedRole: "all" | "uxui" | "frontend" | "web";
+  selectedRole: "all" | "uxui" | "frontend" | "web" | "mobile";
 }
 
 export default function Skills({ skillCategories, selectedRole }: SkillsProps) {
@@ -20,6 +20,7 @@ export default function Skills({ skillCategories, selectedRole }: SkillsProps) {
             const isHighlighted = 
               (selectedRole === "uxui" && category.label === "UX/UI Design") ||
               (selectedRole === "frontend" && category.label === "Frontend & Mobile") ||
+              (selectedRole === "mobile" && category.label === "Frontend & Mobile") ||
               (selectedRole === "web" && category.label === "Backend & Systems");
 
             return (

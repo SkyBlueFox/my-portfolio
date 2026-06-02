@@ -6,15 +6,15 @@ import ProjectCard from "@/components/ui/ProjectCard";
 
 interface ProjectsProps {
   projects: Project[];
-  selectedRole: "all" | "uxui" | "frontend" | "web";
+  selectedRole: "all" | "uxui" | "frontend" | "web" | "mobile";
 }
 
 const getProjectRelevance = (title: string): string[] => {
   if (title.includes("CS Cloth")) return ["frontend", "web"];
-  if (title.includes("HomeBase")) return ["uxui", "frontend"];
-  if (title.includes("Art Toy")) return ["uxui", "frontend", "web"];
+  if (title.includes("HomeBase")) return ["uxui", "frontend", "mobile"];
+  if (title.includes("Art Toy")) return ["uxui", "frontend", "web", "mobile"];
   if (title.includes("HR Management")) return ["uxui", "frontend", "web"];
-  return ["uxui", "frontend", "web"];
+  return ["uxui", "frontend", "web", "mobile"];
 };
 
 export default function Projects({ projects, selectedRole }: ProjectsProps) {
