@@ -174,22 +174,34 @@ export default function DesignShowcase({ designItems, selectedRole }: DesignShow
                       </p>
                     </div>
 
-                    <div className="flex items-center justify-between pt-3 border-t border-slate-200/80 dark:border-slate-800/80">
-                      <a
-                        href={item.figmaUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200 transition-colors cursor-pointer"
-                        aria-label={item.figmaUrl?.includes("behance.net") ? `View ${item.title} Behance case study` : `View ${item.title} Figma file`}
-                      >
-                        {item.figmaUrl?.includes("behance.net") ? (
-                          <span className="font-bold font-mono-custom text-[10px] bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-950 px-1 py-0.5 rounded mr-0.5 select-none shrink-0 scale-95 leading-none">Bē</span>
-                        ) : (
-                          <FigmaIcon size={10} />
+                    <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-200/80 dark:border-slate-800/80 w-full">
+                      <div className="flex flex-wrap items-center gap-3">
+                        {item.behanceUrl && (
+                          <a
+                            href={item.behanceUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200 transition-colors cursor-pointer"
+                            aria-label={`View ${item.title} Behance case study`}
+                          >
+                            <span className="font-bold font-mono-custom text-[10px] bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-950 px-1 py-0.5 rounded mr-0.5 select-none shrink-0 scale-95 leading-none">Bē</span>
+                            Behance Study
+                          </a>
                         )}
-                        {item.figmaUrl?.includes("behance.net") ? "View Behance Case Study" : "View Figma File"}
-                      </a>
-                      <ExternalLink size={10} className="text-slate-400 dark:text-slate-700" />
+                        {item.figmaUrl && (
+                          <a
+                            href={item.figmaUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200 transition-colors cursor-pointer"
+                            aria-label={`View ${item.title} Figma file`}
+                          >
+                            <FigmaIcon size={10} />
+                            Figma Prototype
+                          </a>
+                        )}
+                      </div>
+                      <ExternalLink size={10} className="text-slate-400 dark:text-slate-700 shrink-0" />
                     </div>
                   </div>
 

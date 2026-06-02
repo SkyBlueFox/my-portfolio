@@ -42,6 +42,7 @@ export interface DesignItem {
   title: string;
   type: "Mockup" | "Wireframe" | "User Flow";
   figmaUrl?: string;
+  behanceUrl?: string;
   imageUrl?: string;
   description: string;
 }
@@ -170,7 +171,7 @@ export const portfolioData: PortfolioData = {
       description: "Co-engineered a modular cross-platform mobile frontend using Flutter. Managed design-to-code workflow conversions closely with visual designers to eliminate design debt and optimize fluid responsive widget hierarchies.",
       tech: ["Flutter", "Dart", "Figma", "Component-Driven UI"],
       github: "https://github.com/SkyBlueFox/HomeBase_Frontend.git",
-      demo: "",
+      demo: "https://www.figma.com/proto/H23YwxYHgYr7yRPDoSLgCi/PM?node-id=494-1057&t=0BrAy80bk00AvNta-1",
     },
     {
       title: "Art Toy Bid App (Auction Application)",
@@ -178,7 +179,7 @@ export const portfolioData: PortfolioData = {
       description: "Programmed a high-concurrency mobile auction app featuring synchronous countdown architecture and live-stream state loops. Integrated touch-optimized components and client debounce filters to safeguard system payloads.",
       tech: ["Flutter", "Dart", "Figma Layouts", "API Synchronization"],
       github: "https://github.com/SkyBlueFox/ArtToyBidApp.git",
-      demo: "",
+      demo: "https://www.figma.com/proto/RLZF0Ufhotr8z6OdQZtYmz/Art-toy-Bid-App?node-id=0-1&t=PylHAaiNglpma5j2-1",
     },
   ],
 
@@ -186,19 +187,23 @@ export const portfolioData: PortfolioData = {
     {
       title: "Jorney Mobile Application Case Study",
       type: "Mockup",
-      figmaUrl: "https://www.behance.net/gallery/237289527/Jorney",
+      figmaUrl: "https://www.figma.com/proto/QwtbrPJAvUq8lTWn350kaD/Jorney?node-id=2004-280&t=AU6x7qsHVheekXKV-1",
+      behanceUrl: "https://www.behance.net/gallery/237289527/Jorney",
+      imageUrl: "/jorney_case_study.png",
       description: "An end-to-end mobile visual ecosystem focused on comprehensive typography guidelines, accessible contrast states, and strict WCAG compliance standards.",
     },
     {
       title: "HomeBase Domestic Dashboard Blueprint",
       type: "Wireframe",
-      figmaUrl: "https://github.com/SkyBlueFox/HomeBase_Frontend.git",
+      figmaUrl: "https://www.figma.com/design/H23YwxYHgYr7yRPDoSLgCi/PM?node-id=494-1057&m=dev&t=0BrAy80bk00AvNta-1",
+      imageUrl: "/homebase_case_study.png",
       description: "Information architecture and layouts converting complex automation backend telemetries into clean, intuitive, and glanceable grid interfaces.",
     },
     {
       title: "Art Toy Auction Interactivity States",
       type: "User Flow",
-      figmaUrl: "https://github.com/SkyBlueFox/ArtToyBidApp.git",
+      figmaUrl: "https://www.figma.com/design/RLZF0Ufhotr8z6OdQZtYmz/Art-toy-Bid-App?node-id=0-1&m=dev&t=PylHAaiNglpma5j2-1",
+      imageUrl: "/arttoy_case_study.png",
       description: "Deliberate user mapping configurations handling synchronous real-time error messages, dynamic loading states, and edge-case bidding actions.",
     },
   ],
