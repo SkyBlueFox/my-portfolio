@@ -1,8 +1,4 @@
-// app/layout.tsx
-// ─────────────────────────────────────────────────────────────────────────────
-// Root layout — HTML shell, metadata, and global styles.
-// Stays a Server Component (no "use client") for maximum performance.
-// ─────────────────────────────────────────────────────────────────────────────
+// Root layout wrapper for the entire portfolio app.
 
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";

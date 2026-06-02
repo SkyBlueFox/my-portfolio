@@ -1,8 +1,4 @@
-/* app/globals.css
-   ─────────────────────────────────────────────────────────────────────────────
-   Move the @import to app/layout.tsx via next/font/google for zero-CLS in
-   production. Kept here to make this file self-contained.
-   ───────────────────────────────────────────────────────────────────────── */
+/* Global stylesheet and utility styles for the portfolio */
 
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap');
 
@@ -10,26 +6,26 @@
 @source "../components/**/*.{ts,tsx}";
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ── CSS custom properties ── */
+/* Custom theme variables */
 :root {
   --font-display: 'Syne', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --font-body: 'DM Sans', sans-serif;
 
-  --bg-base: #f8fafc; /* slate-50 */
-  --text-base: #334155; /* slate-700 */
-  --accent: #059669; /* emerald-600 */
-  --accent-dim: rgba(5, 150, 105, 0.08);
+  --bg-base: #ffffff; /* pure white background */
+  --text-base: #0f172a; /* slate-900 for high-contrast visibility */
+  --accent: #0284c7; /* sky-600 interactive accent */
+  --accent-dim: rgba(2, 132, 199, 0.06); /* sky-600 glow */
 }
 
 .dark {
-  --bg-base: #020817; /* slate-950 */
-  --text-base: #cbd5e1; /* slate-300 */
+  --bg-base: #09090b; /* deep carbon black */
+  --text-base: #e4e4e7; /* off-white text */
   --accent: #10b981; /* emerald-500 */
-  --accent-dim: rgba(16, 185, 129, 0.12);
+  --accent-dim: rgba(16, 185, 129, 0.08);
 }
 
-/* ── Base resets ── */
+/* Reset baseline styles */
 html {
   scroll-behavior: smooth;
   background-color: var(--bg-base);
@@ -43,7 +39,7 @@ body {
   transition: background-color 0.4s ease, border-color 0.4s ease, color 0.3s ease;
 }
 
-/* ── Typography utilities ── */
+/* Typography helper utilities */
 .font-display {
   font-family: var(--font-display);
 }
@@ -52,15 +48,15 @@ body {
   font-family: var(--font-mono);
 }
 
-/* ── Gradient name treatment ── */
+/* Gradient text overlay for main header */
 .gradient-name {
-  background: linear-gradient(135deg, #34d399 0%, #60a5fa 55%, #a78bfa 100%);
+  background: linear-gradient(135deg, #0284c7 0%, #10b981 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* ── Dot-grid hero texture ── */
+/* Background dot grid pattern with mouse spotlight overlay */
 .dot-grid {
   position: relative;
   background-image: radial-gradient(circle,
@@ -83,7 +79,7 @@ body {
   z-index: 0;
 }
 
-/* ── Scroll-triggered fade-in ── */
+/* Entrance slide-up animation */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -100,7 +96,23 @@ body {
   animation: fadeUp 0.55s ease-out both;
 }
 
-/* ── Cursor blink in logo ── */
+/* Entrance slide-down animation for navbar header */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-anim {
+  animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Blink animation for design elements */
 @keyframes blink {
 
   0%,
@@ -117,7 +129,7 @@ body {
   animation: blink 1.1s step-end infinite;
 }
 
-/* ── Card shimmer top edge on hover ── */
+/* Hover card light border effect */
 .card-shimmer {
   position: relative;
   overflow: hidden;
@@ -137,7 +149,7 @@ body {
   opacity: 1;
 }
 
-/* ── Custom text selection ── */
+/* Custom text selection styling */
 ::selection {
   background: rgba(16, 185, 129, 0.25);
   color: #d1fae5;

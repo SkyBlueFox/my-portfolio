@@ -1,10 +1,4 @@
-// components/layout/Navbar.tsx
-// ─────────────────────────────────────────────────────────────────────────────
-// "use client" — needs useState + useEffect for:
-//   1. Scroll-triggered frosted background
-//   2. Mobile hamburger menu open/close
-//   3. Dark/Light mode toggle placeholder
-// ─────────────────────────────────────────────────────────────────────────────
+// Client navbar component handling responsive navigation, dark/light theme, and active link highlight on scroll.
 
 "use client";
 
@@ -15,7 +9,8 @@ import { useTheme } from "next-themes";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
-  { label: "Skills & Certificates", href: "#skills" },
+  { label: "Skills", href: "#skills" },
+  { label: "Design", href: "#design" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ] as const;
@@ -36,10 +31,23 @@ export default function Navbar({ githubUrl, authorName }: NavbarProps) {
     setMounted(true);
   }, []);
 
-  // ── Scroll: frost navbar + update active link ──────────────────────────────
+  // Toggle background blur and track current active section on scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      // Force About highlight when at the very top
+      if (window.scrollY < 50) {
+        setActiveHash("#about");
+        return;
+      }
+
+      // Force Contact highlight when scrolled to absolute bottom
+      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
+      if (isAtBottom) {
+        setActiveHash("#contact");
+        return;
+      }
 
       const sections = NAV_LINKS.map(({ href }) =>
         document.querySelector<HTMLElement>(href)
@@ -53,20 +61,14 @@ export default function Navbar({ githubUrl, authorName }: NavbarProps) {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = () => setMenuOpen(false);
-
-  const initials = authorName
-    .split(" ")
-    .map((w) => w[0])
-    .join("");
-
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled
-          ? "bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-200/60 dark:border-slate-800/60 shadow-lg shadow-slate-200/20 dark:shadow-black/20"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 header-anim ${scrolled
+          ? "bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-900/50 shadow-md shadow-slate-200/5 dark:shadow-black/10"
           : "bg-transparent"
         }`}
     >
@@ -74,27 +76,31 @@ export default function Navbar({ githubUrl, authorName }: NavbarProps) {
         className="max-w-5xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between"
         aria-label="Main navigation"
       >
-        {/* Logo */}
+
         <a
           href="#about"
           aria-label="Back to top"
-          className="font-mono-custom text-sm font-medium text-emerald-500 dark:text-emerald-400 tracking-[0.2em] hover:text-emerald-600 dark:hover:text-emerald-300 transition-colors"
+          onClick={() => setActiveHash("#about")}
+          className="font-display text-lg sm:text-xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100 hover:opacity-90 transition-opacity flex items-center gap-0.5"
         >
-          {initials}
-          <span className="cursor-blink text-slate-400 dark:text-slate-600">_</span>
+          <span className="bg-gradient-to-r from-sky-600 to-emerald-500 dark:from-sky-400 dark:to-emerald-400 bg-clip-text text-transparent">
+            supachai
+          </span>
+          <span className="text-emerald-500 dark:text-sky-400 animate-pulse">.</span>
         </a>
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-7" role="list">
+
+        <ul className="hidden md:flex items-center gap-1" role="list">
           {NAV_LINKS.map(({ label, href }) => {
             const isActive = activeHash === href;
             return (
               <li key={href}>
                 <a
                   href={href}
-                  className={`font-mono-custom text-xs uppercase tracking-widest transition-colors ${isActive
-                      ? "text-emerald-500 dark:text-emerald-400"
-                      : "text-slate-500 hover:text-slate-850 dark:hover:text-slate-200"
+                  onClick={() => setActiveHash(href)}
+                  className={`text-[13px] font-medium tracking-wide transition-all duration-200 px-3 py-1.5 rounded-full ${isActive
+                      ? "bg-sky-500/10 text-sky-600 dark:text-sky-400 dark:bg-sky-400/10 font-semibold"
+                      : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900/50"
                     }`}
                 >
                   {label}
@@ -104,57 +110,63 @@ export default function Navbar({ githubUrl, authorName }: NavbarProps) {
           })}
         </ul>
 
-        {/* Right controls */}
-        <div className="flex items-center gap-1.5">
+
+        <div className="flex items-center gap-2">
           <a
             href={githubUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub profile"
-            className="p-2 rounded-lg text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition-all"
+            className="p-2 rounded-full border border-slate-200/80 dark:border-slate-800/80 text-slate-600 hover:text-sky-600 dark:text-slate-400 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-900/50 hover:border-sky-500/30 dark:hover:border-emerald-500/30 transition-all shadow-xs hover:shadow-sm active:scale-95 flex items-center justify-center"
           >
-            <FiGithub size={16} />
+            <FiGithub size={18} />
           </a>
 
-          {/* Theme toggle */}
+
           <button
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            aria-label={mounted && resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            className="p-2 rounded-lg text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition-all cursor-pointer"
+            aria-label="Toggle theme"
+            className="p-2 rounded-full border border-slate-200/80 dark:border-slate-800/80 text-slate-600 hover:text-sky-600 dark:text-slate-400 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-900/50 hover:border-sky-500/30 dark:hover:border-emerald-500/30 transition-all shadow-xs hover:shadow-sm active:scale-95 cursor-pointer flex items-center justify-center"
           >
-            {mounted && resolvedTheme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+            <Sun size={18} className="hidden dark:block text-slate-600 dark:text-emerald-400" />
+            <Moon size={18} className="block dark:hidden text-slate-600" />
           </button>
 
-          {/* Hamburger (mobile only) */}
+
           <button
             onClick={() => setMenuOpen((o) => !o)}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
-            className="md:hidden p-2 rounded-lg text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-200/60 dark:hover:bg-slate-800/60 transition-all cursor-pointer"
+            className="md:hidden p-2 rounded-full border border-slate-200/80 dark:border-slate-800/80 text-slate-600 hover:text-sky-600 dark:text-slate-400 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-900/50 transition-all active:scale-95 cursor-pointer flex items-center justify-center"
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile drawer */}
-      {menuOpen && (
-        <div className="md:hidden bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200/60 dark:border-slate-800/60 px-5 pb-5">
-          <ul className="flex flex-col gap-1 pt-3" role="list">
-            {NAV_LINKS.map(({ label, href }) => (
-              <li key={href}>
-                <a
-                  href={href}
-                  onClick={handleNavClick}
-                  className="block py-2.5 px-3 rounded-lg font-mono-custom text-xs uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all"
-                >
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out border-b border-slate-200/50 dark:border-slate-900/50 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md px-5 ${
+          menuOpen ? "max-h-[350px] opacity-100 pb-5" : "max-h-0 opacity-0 pb-0 pointer-events-none"
+        }`}
+      >
+        <ul className="flex flex-col gap-1 pt-3" role="list">
+          {NAV_LINKS.map(({ label, href }) => (
+            <li key={href}>
+              <a
+                href={href}
+                onClick={() => {
+                  setActiveHash(href);
+                  setMenuOpen(false);
+                }}
+                className="block py-2.5 px-4 rounded-xl font-medium text-[14px] text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-900/50 transition-all"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </header>
   );
 }
