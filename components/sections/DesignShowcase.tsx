@@ -72,17 +72,19 @@ export default function DesignShowcase({ designItems, selectedRole }: DesignShow
             const relevance = getDesignRelevance(item.title);
             const isRelevant = selectedRole === "all" || relevance.includes(selectedRole);
 
+            const isHighlighted = isRelevant && selectedRole !== "all";
+
             return (
               <li 
                 key={item.title} 
-                className={`${gridSpan} transition-all duration-300 ${
-                  isRelevant 
-                    ? "opacity-100 scale-100 blur-none" 
-                    : "opacity-30 scale-[0.98] blur-[0.4px] hover:opacity-100 hover:scale-100 hover:blur-none"
-                }`}
+                className={`${gridSpan} transition-all duration-300`}
               >
-                <div className={`group relative flex rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40 hover:bg-slate-50/50 dark:hover:bg-slate-900/60 hover:border-slate-400 dark:hover:border-slate-600 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-xl transition-all duration-300 ease-out p-5 h-full shadow-sm shadow-slate-100/50 dark:shadow-none ${
+                <div className={`group relative flex rounded-2xl border transition-all duration-300 ease-out p-5 h-full shadow-sm dark:shadow-none ${
                   isFullWidth ? "flex-col lg:flex-row gap-6 items-center" : "flex-col"
+                } ${
+                  isHighlighted
+                    ? "bg-sky-500/[0.01] dark:bg-emerald-500/[0.01] border-sky-500/40 dark:border-emerald-500/40 scale-[1.01] ring-1 ring-sky-500/15 dark:ring-emerald-500/15 shadow-lg shadow-sky-500/[0.01] dark:shadow-emerald-500/[0.01] hover:-translate-y-1 hover:scale-[1.02] hover:border-sky-500/60 dark:hover:border-emerald-500/60 hover:shadow-xl"
+                    : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40 hover:bg-slate-50/50 dark:hover:bg-slate-900/60 hover:border-slate-400 dark:hover:border-slate-600 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-xl shadow-slate-100/50"
                 }`}>
 
                   <div className={`relative rounded-xl bg-slate-200/70 dark:bg-slate-950/70 border border-slate-300/40 dark:border-slate-800/40 overflow-hidden flex items-center justify-center group-hover:border-emerald-500/30 transition-colors shrink-0 ${

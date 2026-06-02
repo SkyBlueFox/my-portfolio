@@ -29,9 +29,7 @@ export default function Skills({ skillCategories, selectedRole }: SkillsProps) {
                 className={`p-6 rounded-2xl border transition-all duration-300 flex flex-col justify-between ${
                   isHighlighted 
                     ? "bg-sky-500/[0.02] dark:bg-emerald-500/[0.02] border-sky-500/40 dark:border-emerald-500/40 shadow-lg shadow-sky-500/[0.01] dark:shadow-emerald-500/[0.01] scale-[1.02] ring-1 ring-sky-500/20 dark:ring-emerald-500/20" 
-                    : selectedRole === "all"
-                    ? "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40 opacity-100"
-                    : "border-slate-200/50 dark:border-slate-800/50 bg-white/50 dark:bg-slate-900/20 opacity-40 scale-[0.98] blur-[0.3px]"
+                    : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40"
                 }`}
               >
                 <div>

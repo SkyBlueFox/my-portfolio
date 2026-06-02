@@ -40,9 +40,10 @@ const FigmaIcon = ({ size = 12 }: { size?: number }) => (
 interface ProjectCardProps {
   project: Project;
   selectedRole?: "all" | "uxui" | "frontend" | "web" | "mobile";
+  isHighlighted?: boolean;
 }
 
-export default function ProjectCard({ project, selectedRole = "all" }: ProjectCardProps) {
+export default function ProjectCard({ project, selectedRole = "all", isHighlighted = false }: ProjectCardProps) {
   const resolvedRole = typeof project.role === "string"
     ? project.role
     : (project.role[selectedRole] || project.role["all"] || project.role["frontend"]);
@@ -52,7 +53,11 @@ export default function ProjectCard({ project, selectedRole = "all" }: ProjectCa
     : (project.description[selectedRole] || project.description["all"] || project.description["frontend"]);
 
   return (
-    <article className="card-shimmer group relative flex flex-col p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40 hover:bg-slate-50/50 dark:hover:bg-slate-900/60 hover:border-slate-400 dark:hover:border-slate-600 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-xl hover:shadow-emerald-500/[0.02] dark:hover:shadow-emerald-400/[0.02] transition-all duration-300 ease-out shadow-sm shadow-slate-100/50 dark:shadow-none">
+    <article className={`card-shimmer group relative flex flex-col p-6 rounded-2xl border transition-all duration-300 ease-out shadow-sm dark:shadow-none ${
+      isHighlighted
+        ? "bg-sky-500/[0.01] dark:bg-emerald-500/[0.01] border-sky-500/40 dark:border-emerald-500/40 scale-[1.01] ring-1 ring-sky-500/15 dark:ring-emerald-500/15 shadow-lg shadow-sky-500/[0.01] dark:shadow-emerald-500/[0.01] hover:-translate-y-1 hover:scale-[1.02] hover:border-sky-500/60 dark:hover:border-emerald-500/60 hover:shadow-xl"
+        : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40 hover:bg-slate-50/50 dark:hover:bg-slate-900/60 hover:border-slate-400 dark:hover:border-slate-600 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-xl shadow-slate-100/50"
+    }`}>
 
 
       <h3 className="font-display text-xl font-semibold text-slate-900 dark:text-slate-100 mb-1 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors duration-200">

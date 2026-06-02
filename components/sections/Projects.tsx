@@ -36,13 +36,13 @@ export default function Projects({ projects, selectedRole }: ProjectsProps) {
             return (
               <li 
                 key={project.title}
-                className={`transition-all duration-300 ${
-                  isRelevant 
-                    ? "opacity-100 scale-100 blur-none" 
-                    : "opacity-30 scale-[0.98] blur-[0.4px] hover:opacity-100 hover:scale-100 hover:blur-none"
-                }`}
+                className="transition-all duration-300"
               >
-                <ProjectCard project={project} selectedRole={selectedRole} />
+                <ProjectCard 
+                  project={project} 
+                  selectedRole={selectedRole} 
+                  isHighlighted={isRelevant && selectedRole !== "all"}
+                />
               </li>
             );
           })}
