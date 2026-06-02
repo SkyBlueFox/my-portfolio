@@ -69,7 +69,7 @@ export default function Hero({ profile, roles, selectedRole, setSelectedRole }: 
                 className={`px-4 py-2 rounded-lg text-xs font-semibold tracking-wide transition-all duration-200 active:scale-95 cursor-pointer ${
                   isActive
                     ? "bg-white dark:bg-slate-800 text-sky-600 dark:text-emerald-400 shadow-sm border border-slate-200/50 dark:border-slate-700/50"
-                    : "text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
+                    : "text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-200/40 dark:hover:bg-slate-800/30 hover:scale-[1.02]"
                 }`}
               >
                 {tab.label}
